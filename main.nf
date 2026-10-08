@@ -7,13 +7,14 @@ workflow {
     ch_input=Channel.of(
     tuple(
         meta,
-        file("${params.input}/matrix.mtx"),
-        file("${params.input}/barcodes.tsv"),
-        file("${params.input}/genes.tsv")
-    )
+        file("${params.input}/matrix.mtx.gz"),
+        file("${params.input}/barcodes.tsv.gz"),
+        file("${params.input}/features.tsv.gz"),
+        file("${params.input}/sce.h5")
+        )
     )
 
     ch_input.view()
-    READ_10X_COUNTS(ch_input,'test')
-    READ_10X_COUNTS.out.outfile.view()
+    READ_10X_COUNTS(ch_input,'mtx','test')
+    //READ_10X_COUNTS.out.outfile.view()
 }
