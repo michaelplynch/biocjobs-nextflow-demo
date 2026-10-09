@@ -1,4 +1,4 @@
-include {READ_10X_COUNTS} from '../DropletUtils/wrappers/read-10x-counts'
+include {READ_10X_COUNTS_MTX} from '../DropletUtils/wrappers/read-10x-counts-mtx'
 
 
 workflow {    
@@ -9,12 +9,11 @@ workflow {
         meta,
         file("${params.input}/matrix.mtx.gz"),
         file("${params.input}/barcodes.tsv.gz"),
-        file("${params.input}/features.tsv.gz"),
-        file("${params.input}/sce.h5")
+        file("${params.input}/features.tsv.gz")
         )
     )
 
     ch_input.view()
-    READ_10X_COUNTS(ch_input,'mtx','test')
+    READ_10X_COUNTS_MTX(ch_input,'test')
     //READ_10X_COUNTS.out.outfile.view()
 }
